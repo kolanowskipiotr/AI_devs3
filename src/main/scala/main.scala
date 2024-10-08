@@ -9,11 +9,9 @@ import sttp.tapir.server.netty.sync.NettySyncServer
 
 import scala.util.Random
 
-object Main {
-  private val logger = Logger(getClass.getName)
-
-  @main
-  def main(): Unit = {
+@main
+def main(): Unit =
+  val logger = Logger(getClass.getName)
 
   val applicationPort = getRandomPort
   var server = NettySyncServer().port(applicationPort)
@@ -37,12 +35,10 @@ object Main {
 
   logger.info(s"Applition starting on port: $applicationPort")
   server.startAndWait()
-    }
 
-  def getRandomPort: Int = {
-    val minPort = 8081 // Minimum port number above 8080
-    val maxPort = 65535 // Maximum valid port number
-    Random.nextInt((maxPort - minPort) + 1) + minPort
-  }
+def getRandomPort: Int = {
+  val minPort = 8081 // Minimum port number above 8080
+  val maxPort = 65535 // Maximum valid port number
+  Random.nextInt((maxPort - minPort) + 1) + minPort
 }
 
