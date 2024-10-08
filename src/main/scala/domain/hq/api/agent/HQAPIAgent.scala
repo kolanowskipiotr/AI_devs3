@@ -3,6 +3,10 @@ package domain.hq.api.agent
 
 import domain.{Agent, HQRequest, HQResponse}
 
+import io.circe
+import io.circe.Error
+import io.circe.generic.auto.*
+import io.circe.parser.decode
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 import org.slf4j.LoggerFactory
@@ -10,22 +14,20 @@ import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
 import sttp.client3.asynchttpclient.monix.AsyncHttpClientMonixBackend
-import sttp.client3.circe.asJson
-import sttp.client3.{HttpError, Response, SttpBackend, UriContext, asString, basicRequest}
+import sttp.client3.circe.{asJson, circeBodySerializer}
+import sttp.client3.{HttpError, ResponseException, SttpBackend, UriContext, asString, basicRequest}
 import sttp.shared.Identity
 import sttp.tapir.*
 import sttp.tapir.generic.auto.*
 import sttp.tapir.json.circe.jsonBody
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.netty.sync.OxStreams
-import io.circe.parser.decode
-import io.circe.generic.auto.*
 
 case class HQAPIAgent(lesson: String) extends Agent {
 
   private val logger = LoggerFactory.getLogger(getClass)
 
-  override def endpoints: List[ServerEndpoint[OxStreams & WebSockets, Identity]] = {
+  override def endpoints: List[ServerEndpoint[OxStreams & WebSockets, Identity]] =
     List(
       endpoint
         .post
@@ -34,62 +36,70 @@ case class HQAPIAgent(lesson: String) extends Agent {
         .out(jsonBody[HQResponse])
         .handleSuccess(getDataAndSendToHQ)
     )
-  }
 
   private def getDataAndSendToHQ(hqApiKey: String): HQResponse = {
     val taskName = "POLIGON"
 
-    AsyncHttpClientMonixBackend.resource()
-      .use {
-        getPoligonData
-      }
-      .runSyncUnsafe()
-      .map(data => data.split("\n").toList)
+    doGetPoligonData()
+      .map(_.split("\n").toList)
       .map(data => HQRequest(taskName, hqApiKey, data))
-      .map(hqRequest => sendDataToHQ(hqRequest))
-      .fold(
-        err => {
-          logger.error(err)
-          HQResponse.systemError
-        },
-        identity
-      )
-  }
-
-  private def sendDataToHQ(hqRequest: HQRequest): HQResponse = {
-
-    import sttp.client3.circe.circeBodySerializer
-    val r = basicRequest
-      .body(hqRequest)
-      .post(uri"https://poligon.aidevs.pl/verify")
-      .response(asJson[HQResponse])
-
-    AsyncHttpClientMonixBackend.resource()
-      .use { backend => r.send(backend) }
-      .runSyncUnsafe()
-      .body match {
-      case Left(value) =>
-        decode[HQResponse](value.asInstanceOf[HttpError[String]].body) match {
-          case Right(hqResponse) =>
-            hqResponse
-          case Left(err) =>
-            logger.info(err.toString)
-            HQResponse.systemError
-        }
-      case Right(value) =>
-        value
+      .flatMap(doPostPoligonVeryfication) match {
+      case Left(value) => value match
+        case HttpError(body, _) => tryParseHQResponse(body)
+        case err => tryParseHQResponse(err.toString)
+      case Right(value) => value
     }
   }
 
-  private def getPoligonData(backend: SttpBackend[Task, MonixStreams & WebSockets]) = {
+  private def doGetPoligonData(): Either[String, String] =
+    AsyncHttpClientMonixBackend.resource()
+      .use { getPoligonData }
+      .runSyncUnsafe()
+
+  private def doPostPoligonVeryfication(hqRequest: HQRequest): Either[ResponseException[String, Error], HQResponse] = {
+    AsyncHttpClientMonixBackend.resource()
+      .use { backend => postPoligonVeryfication(backend, hqRequest) }
+      .runSyncUnsafe()
+  }
+
+  private def postResponseToHQ(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQResponse): Task[Either[ResponseException[String, Error], HQResponse]] =
+    basicRequest
+      .body(hqRequest)
+      .post(uri"https://poligon.aidevs.pl/verify")
+      .response(asJson[HQResponse])
+      .send(backend)
+      .map(response => {
+        logger.info(s"Got response code: ${response.code} Body: ${response.body}")
+        response.body
+      })
+
+  private def postPoligonVeryfication(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
+    basicRequest
+      .body(hqRequest)
+      .post(uri"https://poligon.aidevs.pl/verify")
+      .response(asJson[HQResponse])
+      .send(backend)
+      .map(response => {
+        logger.info(s"Got response code: ${response.code} Body: ${response.body}")
+        response.body
+      })
+
+  private def getPoligonData(backend: SttpBackend[Task, MonixStreams & WebSockets]): Task[Either[String, String]] =
     basicRequest
       .get(uri"https://poligon.aidevs.pl/dane.txt")
       .response(asString)
       .send(backend)
-      .map { (response: Response[Either[String, String]]) =>
+      .map { response =>
         logger.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       }
-  }
+
+  private def tryParseHQResponse(body: String) =
+    decode[HQResponse](body) match {
+      case Right(hqResponse) => hqResponse
+      case Left(err) =>
+        logger.error(s"Parsing of error body fail ${err.getMessage}", err)
+        HQResponse.systemError
+    }
 
 }
