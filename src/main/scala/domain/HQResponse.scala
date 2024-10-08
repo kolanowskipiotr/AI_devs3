@@ -10,6 +10,9 @@ case class HQResponse(
 )
 
 object HQResponse {
+  
+  def systemError: HQResponse = HQResponse(Int.MaxValue, "System error")
+  
   implicit val encoder: Encoder[HQResponse] = deriveEncoder[HQResponse]
   implicit val decoder: Decoder[HQResponse] = deriveDecoder[HQResponse]
 }

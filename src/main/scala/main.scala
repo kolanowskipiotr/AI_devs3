@@ -28,7 +28,7 @@ def main(): Unit =
   })
 
   sys.addShutdownHook {
-    logger.info(s"Shutting down")
+    logger.info(s"Shutting down...")
   }
 
   logger.info(s"Applition starting on port: $applicationPort")

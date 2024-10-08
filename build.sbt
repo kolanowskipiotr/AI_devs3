@@ -12,6 +12,9 @@ lazy val root = (project in file("."))
       "com.softwaremill.sttp.tapir" %% "tapir-netty-server-sync" % "1.11.5",
       "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
       "ch.qos.logback" % "logback-classic" % "1.5.6",
-      "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.11.6"
+      "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % "1.11.6",
+      "com.softwaremill.sttp.client3" %% "async-http-client-backend-monix" % "3.9.7",
+      "com.softwaremill.sttp.client3" %% "circe" % "3.9.7",
+      "io.circe" %% "circe-generic" % "0.14.7"
     )
   )
