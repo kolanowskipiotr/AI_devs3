@@ -30,10 +30,10 @@ import scala.util.Random
         | /        \\     /  / __ \_/ /_/  > /_/  >  ___/|  | \/
         |/_______  / \/\_/  (____  /\___  /\___  / \___  >__|
         |        \/              \//_____//_____/      \/
-        | """.stripMargin +
-        s"Server started on port: ${binding.port}.\n" +
-        s"Go to http://localhost:${binding.port}/docs to open SwaggerUI.\n" +
-        s"Press ENTER key to exit."
+        |""".stripMargin +
+        s" Go to http://localhost:${binding.port}/docs to open SwaggerUI.\n" +
+        s" Server started on port: ${binding.port}.\n" +
+        s" Press ENTER key to exit."
     )
 
   def getRandomPort: Int = {
