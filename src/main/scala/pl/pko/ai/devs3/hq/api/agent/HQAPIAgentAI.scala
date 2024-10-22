@@ -1,7 +1,4 @@
-package pl.pko.ai.devs3
-package domain.hq.api.agent
-
-import domain.{Agent, HQRequest, HQResponse}
+package pl.pko.ai.devs3.hq.api.agent
 
 import io.circe
 import io.circe.Error
@@ -9,32 +6,33 @@ import io.circe.generic.auto.*
 import io.circe.parser.decode
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
-import org.slf4j.LoggerFactory
+import pl.pko.ai.devs3.agent.AgentAI
+import pl.pko.ai.devs3.hq.model.{HQRequest, HQResponse}
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
+import sttp.client3.*
 import sttp.client3.asynchttpclient.monix.AsyncHttpClientMonixBackend
 import sttp.client3.circe.{asJson, circeBodySerializer}
-import sttp.client3.{HttpError, ResponseException, SttpBackend, UriContext, asString, basicRequest}
-import sttp.shared.Identity
 import sttp.tapir.*
 import sttp.tapir.generic.auto.*
 import sttp.tapir.json.circe.jsonBody
 import sttp.tapir.server.ServerEndpoint
-import sttp.tapir.server.netty.sync.OxStreams
 
-case class HQAPIAgent(lesson: String) extends Agent {
+import scala.concurrent.Future
 
-  private val logger = LoggerFactory.getLogger(getClass)
+case class HQAPIAgentAI(lesson: String) extends AgentAI {
 
-  override def endpoints: List[ServerEndpoint[OxStreams & WebSockets, Identity]] =
+  override def endpoints: List[ServerEndpoint[Any, Future]] =
     List(
       endpoint
         .post
-        .in("agents" / "hq-api-agent" / "send-data-to-hq")
+        .in("sync" / "agents" / "hq-api-agent" / "send-data-to-hq")
         .in(header[String]("hq-api-key"))
         .out(jsonBody[HQResponse])
-        .handleSuccess(getDataAndSendToHQ)
+        .serverLogicSuccess(hqApiKey => Future { 
+          getDataAndSendToHQ(hqApiKey) 
+        })
     )
 
   private def getDataAndSendToHQ(hqApiKey: String): HQResponse = {
@@ -69,7 +67,7 @@ case class HQAPIAgent(lesson: String) extends Agent {
       .response(asJson[HQResponse])
       .send(backend)
       .map(response => {
-        logger.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       })
 
@@ -80,7 +78,7 @@ case class HQAPIAgent(lesson: String) extends Agent {
       .response(asJson[HQResponse])
       .send(backend)
       .map(response => {
-        logger.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       })
 
@@ -90,7 +88,7 @@ case class HQAPIAgent(lesson: String) extends Agent {
       .response(asString)
       .send(backend)
       .map { response =>
-        logger.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       }
 
@@ -98,7 +96,7 @@ case class HQAPIAgent(lesson: String) extends Agent {
     decode[HQResponse](body) match {
       case Right(hqResponse) => hqResponse
       case Left(err) =>
-        logger.error(s"Parsing of error body fail ${err.getMessage}", err)
+        log.error(s"Parsing of error body fail ${err.getMessage}", err)
         HQResponse.systemError
     }
 

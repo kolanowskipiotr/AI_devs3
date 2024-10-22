@@ -1,8 +1,7 @@
-package pl.pko.ai.devs3
-package domain
+package pl.pko.ai.devs3.hq.model
 
-import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
+import io.circe.{Decoder, Encoder}
 
 case class HQResponse(
   code: Int,
