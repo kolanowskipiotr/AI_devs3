@@ -24,16 +24,20 @@ import scala.util.Random
   def logSawaggerUrl(binding: NettyFutureServerBinding): Unit =
     log.info(
       """
-        |  _________
-        | /   _____/_  _  _______     ____   ____   ___________
-        | \_____  \\ \/ \/ /\__  \   / ___\ / ___\_/ __ \_  __ \
-        | /        \\     /  / __ \_/ /_/  > /_/  >  ___/|  | \/
-        |/_______  / \/\_/  (____  /\___  /\___  / \___  >__|
-        |        \/              \//_____//_____/      \/
+        |      _,.,.__,--.__,-----.
+        |   ,""   '))              `.
+        | ,'   e                    ))
+        |(  .='__,                  ,
+        | `~`     `-\  /._____,/   /
+        |          | | )    (  (   ;
+        |          | | |    / / / / 
+        |vvVVvvVvVVVvvVVVvvVVvVvvvVvvVv
+        |https://tapir.softwaremill.com
         |""".stripMargin +
-        s" Go to http://localhost:${binding.port}/docs to open SwaggerUI.\n" +
-        s" Server started on port: ${binding.port}.\n" +
-        s" Press ENTER key to exit."
+        "\n" +
+        s"Go to http://localhost:${binding.port}/docs to open SwaggerUI.\n" +
+        s"Server started on port: ${binding.port}.\n" +
+        s"Press ENTER key to exit."
     )
 
   def getRandomPort: Int = {
