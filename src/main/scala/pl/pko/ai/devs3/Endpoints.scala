@@ -5,6 +5,7 @@ import pl.pko.ai.devs3.helth.check.HelthCheckAgentAI
 import pl.pko.ai.devs3.hq.api.agent.{HQAPIAgentAI, HQAPIAsyncAgentAI}
 import pl.pko.ai.devs3.s01.e01.RobotsSystemLoginAgentAI
 import pl.pko.ai.devs3.s01.e02.RobotsSystemIdentityCheckAgentAI
+import pl.pko.ai.devs3.s01.e03.RobotsCalibrationSystemFixesAgentAI
 import sttp.tapir.*
 import sttp.shared.Identity
 import sttp.tapir.server.ServerEndpoint
@@ -21,6 +22,7 @@ object Endpoints:
     HQAPIAsyncAgentAI("Prework"),
     RobotsSystemLoginAgentAI("S01EO1"),
     RobotsSystemIdentityCheckAgentAI("S01EO2"),
+    RobotsCalibrationSystemFixesAgentAI("S01EO3"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
