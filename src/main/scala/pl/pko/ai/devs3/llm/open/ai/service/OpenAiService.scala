@@ -1,4 +1,4 @@
-package pl.pko.ai.devs3.open.ai
+package pl.pko.ai.devs3.llm.open.ai.service
 
 object OpenAiService {
 

@@ -7,8 +7,8 @@ import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 import pl.pko.ai.devs3.agent.AgentAI
 import pl.pko.ai.devs3.hq.model.HQResponse
-import pl.pko.ai.devs3.ollama.model.OllamaResponse
-import pl.pko.ai.devs3.ollama.service.OllamaService
+import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
+import pl.pko.ai.devs3.llm.ollama.service.OllamaService
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3

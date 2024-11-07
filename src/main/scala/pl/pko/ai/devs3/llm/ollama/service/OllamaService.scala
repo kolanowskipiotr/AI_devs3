@@ -1,10 +1,10 @@
-package pl.pko.ai.devs3.ollama.service
+package pl.pko.ai.devs3.llm.ollama.service
 
 import io.circe.{Error, Json}
 import monix.eval.Task
 import sttp.client3.circe.asJson
 import org.slf4j.{Logger, LoggerFactory}
-import pl.pko.ai.devs3.ollama.model.OllamaResponse
+import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3.{Response, ResponseException, SttpBackend, UriContext, basicRequest}

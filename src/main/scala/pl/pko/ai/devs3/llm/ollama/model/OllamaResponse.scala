@@ -1,4 +1,4 @@
-package pl.pko.ai.devs3.ollama.model
+package pl.pko.ai.devs3.llm.ollama.model
 
 case class OllamaResponse(
   response: String

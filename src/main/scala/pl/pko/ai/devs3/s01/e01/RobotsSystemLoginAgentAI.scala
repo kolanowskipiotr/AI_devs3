@@ -9,7 +9,7 @@ import monix.execution.Scheduler.Implicits.global
 import org.jsoup.Jsoup
 import pl.pko.ai.devs3.agent.AgentAI
 import pl.pko.ai.devs3.hq.model.{HQRequest, HQResponse}
-import pl.pko.ai.devs3.ollama.model.OllamaResponse
+import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
