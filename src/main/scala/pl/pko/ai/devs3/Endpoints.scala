@@ -3,7 +3,7 @@ package pl.pko.ai.devs3
 import pl.pko.ai.devs3.agent.AgentAI
 import pl.pko.ai.devs3.helth.check.HelthCheckAgentAI
 import pl.pko.ai.devs3.hq.api.agent.{HQAPIAgentAI, HQAPIAsyncAgentAI}
-import pl.pko.ai.devs3.s01e01.RobotsSystemLoginAgentAI
+import pl.pko.ai.devs3.s01.e01.RobotsSystemLoginAgentAI
 import sttp.tapir.*
 import sttp.shared.Identity
 import sttp.tapir.server.ServerEndpoint

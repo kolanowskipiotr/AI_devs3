@@ -1,4 +1,4 @@
-package pl.pko.ai.devs3.s01e01
+package pl.pko.ai.devs3.s01.e01
 
 import io.circe
 import io.circe.generic.auto.*
