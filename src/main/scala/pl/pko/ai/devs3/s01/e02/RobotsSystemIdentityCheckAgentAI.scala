@@ -47,7 +47,7 @@ case class RobotsSystemIdentityCheckAgentAI(lesson: String) extends AgentAI {
     )
 
   private def getDataAndSendToHQ(hqApiKey: String): HQResponse = {
-    val context = Context.empty
+    val context = Context.empty(hqApiKey)
 
     getIdetityCheckQuestion(context)
       .flatMap(findAnsware)

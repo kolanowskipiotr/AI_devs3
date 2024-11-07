@@ -91,13 +91,4 @@ case class HQAPIAgentAI(lesson: String) extends AgentAI {
         log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       }
-
-  private def tryParseHQResponse(body: String) =
-    decode[HQResponse](body) match {
-      case Right(hqResponse) => hqResponse
-      case Left(err) =>
-        log.error(s"Parsing of error body fail ${err.getMessage}", err)
-        HQResponse.systemError
-    }
-
 }

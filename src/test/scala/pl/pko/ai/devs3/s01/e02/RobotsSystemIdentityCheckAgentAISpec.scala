@@ -33,7 +33,7 @@ class RobotsSystemIdentityCheckAgentAISpec extends AnyFlatSpec with Matchers wit
     // when
     val response = basicRequest
       .post(uri"http://test.com/sync/agents/s01/e02/identity-check")
-      .headers(Map("open-ai-api-key" -> "123"))
+      .headers(Map("open-ai-api-key" -> "sk-proj-n***"))
       .send(backendStub)
 
     // then
