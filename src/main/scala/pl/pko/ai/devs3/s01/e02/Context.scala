@@ -1,11 +1,12 @@
 package pl.pko.ai.devs3.s01.e02
 
+import pl.pko.ai.devs3.llm.model.LLMResponse
 import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
 
 case class Context(
-  openApiKey: String,
+  llmApiKey: String,
   question: Option[IdentityCheckMessage],
-  answare: Option[OllamaResponse],
+  answare: Option[LLMResponse],
   checkResult: Option[IdentityCheckMessage]
 )
 

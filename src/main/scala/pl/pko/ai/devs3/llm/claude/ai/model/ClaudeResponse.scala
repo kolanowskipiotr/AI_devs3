@@ -9,10 +9,10 @@ case class ClaudeResponse(
   model: String,
   content: List[Content],
   stop_reason: String,
-  stop_sequence: String,
+  stop_sequence: Option[String],
   usage: Usage
 ) extends LLMResponse {
-  
+
   override def textResponse: String = content.map(_.text).mkString(" ")
 }
 

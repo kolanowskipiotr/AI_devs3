@@ -18,7 +18,7 @@ object ClaudeService {
       |    "model": "claude-3-5-sonnet-20241022",
       |    "max_tokens": 1024,
       |    "messages": [
-      |        {"role": "user", "content": "${Json.fromString(prompt)}"}
+      |        {"role": "user", "content": ${Json.fromString(prompt)}}
       |    ]
       |}""".stripMargin
     log.info(requestBody)
@@ -26,7 +26,7 @@ object ClaudeService {
     basicRequest
       .post(uri"https://api.anthropic.com/v1/messages")
       .header("x-api-key", apiKey)
-      .header("anthropic-version", "2024-10-22")
+      .header("anthropic-version", "2023-06-01")
       .header("content-type", "application/json")
       .body(requestBody)
       .response(asJson[ClaudeResponse])

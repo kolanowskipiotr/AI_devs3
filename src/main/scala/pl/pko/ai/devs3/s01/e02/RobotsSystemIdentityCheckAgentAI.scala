@@ -1,14 +1,13 @@
 package pl.pko.ai.devs3.s01.e02
 
 import io.circe
+import io.circe.Error
 import io.circe.generic.auto.*
-import io.circe.{Error, Json}
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 import pl.pko.ai.devs3.agent.AgentAI
 import pl.pko.ai.devs3.hq.model.HQResponse
-import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
-import pl.pko.ai.devs3.llm.ollama.service.OllamaService
+import pl.pko.ai.devs3.llm.claude.ai.service.ClaudeService
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
@@ -36,7 +35,7 @@ case class RobotsSystemIdentityCheckAgentAI(lesson: String) extends AgentAI {
       endpoint
         .post
         .in("sync" / "agents" / "s01" / "e02" / "identity-check")
-        .in(header[String]("open-ai-api-key"))
+        .in(header[String]("llm-ai-api-key"))
         .out(jsonBody[HQResponse])
         .serverLogicSuccess(hqApiKey => Future {
           getDataAndSendToHQ(hqApiKey)
@@ -98,7 +97,7 @@ case class RobotsSystemIdentityCheckAgentAI(lesson: String) extends AgentAI {
          |</context>
          |""".stripMargin
 
-    OllamaService.sendPrompt(backend, prompt)
+    ClaudeService.sendPrompt(backend, context.llmApiKey, prompt)
       .map { response =>
         response.body.map(answare => context.copy(answare = Some(answare)))
       }
@@ -113,7 +112,7 @@ case class RobotsSystemIdentityCheckAgentAI(lesson: String) extends AgentAI {
     val requestBody =
       s"""{
          |    "msgID": "${context.question.get.msgID}",
-         |    "text": "${context.answare.get.response.replaceAll("\n", "")}"
+         |    "text": "${context.answare.get.textResponse.replaceAll("\n", "")}"
          |}""".stripMargin
     basicRequest
       .post(uri"https://xyz.ag3nts.org/verify")
