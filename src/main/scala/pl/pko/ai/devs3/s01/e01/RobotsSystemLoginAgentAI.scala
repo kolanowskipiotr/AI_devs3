@@ -293,23 +293,6 @@ case class RobotsSystemLoginAgentAI(lesson: String) extends AgentAI {
         log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body
       }
-  //
-  //  private def postLogin(): Either[String, String] =
-  //    AsyncHttpClientMonixBackend.resource()
-  //      .use { scrapUsingFirecrawl }
-  //      .runSyncUnsafe()
-  //
-  //  private def loginRequest(answer: String): Either[ResponseException[String, Error], HQResponse] = {
-  //    val username = "admin"
-  //    val password = "admin"
-  //    basicRequest
-  //      .post(uri"http://xyz.ag3nts.org/")
-  //      .body(Map("username" -> username, "password" -> password, "answer" -> answer))
-  //      .response(asJson[HQResponse])
-  //      .send(backend)
-  //      .map(_.body)
-  //  }
-
 
   private def doPostPoligonVeryfication(hqRequest: HQRequest): Either[ResponseException[String, Error], HQResponse] = {
     AsyncHttpClientMonixBackend.resource()
