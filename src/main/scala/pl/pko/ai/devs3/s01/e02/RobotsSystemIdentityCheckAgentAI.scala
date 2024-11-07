@@ -2,27 +2,24 @@ package pl.pko.ai.devs3.s01.e02
 
 import io.circe
 import io.circe.generic.auto.*
-import io.circe.parser.decode
 import io.circe.{Error, Json}
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
-import org.jsoup.Jsoup
-import org.slf4j.{Logger, LoggerFactory}
 import pl.pko.ai.devs3.agent.AgentAI
-import pl.pko.ai.devs3.hq.model.{HQRequest, HQResponse}
+import pl.pko.ai.devs3.hq.model.HQResponse
 import pl.pko.ai.devs3.ollama.model.OllamaResponse
+import pl.pko.ai.devs3.ollama.service.OllamaService
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
 import sttp.client3.*
 import sttp.client3.asynchttpclient.monix.AsyncHttpClientMonixBackend
-import sttp.client3.circe.{asJson, circeBodySerializer}
+import sttp.client3.circe.asJson
 import sttp.tapir.*
 import sttp.tapir.generic.auto.*
 import sttp.tapir.json.circe.jsonBody
 import sttp.tapir.server.ServerEndpoint
 
-import java.net.URLEncoder
 import scala.concurrent.Future
 import scala.io.Source
 import scala.util.Using
@@ -101,17 +98,8 @@ case class RobotsSystemIdentityCheckAgentAI(lesson: String) extends AgentAI {
          |</context>
          |""".stripMargin
 
-    val requestBody = s"""{ "model": "gemma2:2b", "prompt": ${Json.fromString(prompt)}, "stream": false }"""
-    log.info(requestBody)
-
-    basicRequest
-      .post(uri"http://localhost:11434/api/generate")
-      .body(requestBody)
-      .response(asJson[OllamaResponse])
-      .send(backend)
+    OllamaService.sendPrompt(backend, prompt)
       .map { response =>
-        log.info(s"Send request ${response.request}, Body($requestBody)")
-        log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response.body.map(answare => context.copy(answare = Some(answare)))
       }
   }
