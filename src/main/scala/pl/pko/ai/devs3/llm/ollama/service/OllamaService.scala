@@ -14,7 +14,11 @@ object OllamaService {
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   def sendPrompt(backend: SttpBackend[Task, MonixStreams & WebSockets], prompt: String): Task[Response[Either[ResponseException[String, Error], OllamaResponse]]] = {
-    val requestBody = s"""{ "model": "gemma2:2b", "prompt": ${Json.fromString(prompt)}, "stream": false }"""
+    sendPrompt(backend, "gemma2:9b", prompt)
+  }
+
+  def sendPrompt(backend: SttpBackend[Task, MonixStreams & WebSockets], model: String, prompt: String): Task[Response[Either[ResponseException[String, Error], OllamaResponse]]] = {
+    val requestBody = s"""{ "model": "$model", "prompt": ${Json.fromString(prompt)}, "stream": false }"""
     log.info(requestBody)
 
     basicRequest
