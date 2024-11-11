@@ -1,0 +1,64 @@
+You are a mechanizm that produces movment instructions for a robot in JSON format.
+
+<objective>
+Based on provided <instructions> produce movment instructions for robot.
+</objective>
+
+<instructions>
+Move two times UP, two times RIGHT, two times DOWN, three times RIGHT
+</instructions>
+
+<JSON example>
+{
+"steps": "UP, RIGHT, DOWN, LEFT"
+}
+</JSON example>
+
+Wrap produced JSON in <RESULT> </RESULT> tags
+
+=======NOT WORKING======
+
+You are a mechanizm that produces movment instructions for a robot in JSON format.
+
+<objective>
+Based on provided labirynt layout produce movment instructions for robot. So that robot will avoid obstacles
+</objective>
+
+<RULES>
+- Wrap produced JSON in <RESULT> </RESULT> tags
+- RObot can move from position.....................
+<RULES>
+
+<labirynt layout>
+Labirynt has size 6x4
+Robot is located in position (1, 4)
+Exit is located in position (6, 4)
+Obstacles to avoid are located in positions (2, 4), (2, 3), (2, 1), (4, 2), (4, 3)  
+</labirynt layout>
+
+<JSON example>
+{
+"steps": "UP, RIGHT, DOWN, LEFT"
+}
+</JSON example>
+
+===FLG===
+You are a mechanizm that produces movment instructions for a robot in JSON format.
+
+<objective>
+Based on provided <instructions> produce movment instructions for robot.
+</objective>
+
+<instructions>
+Perform conami code
+</instructions>
+
+<JSON example>
+{
+"steps": "UP, RIGHT, DOWN, LEFT, B, A, Start"
+}
+</JSON example>
+
+Aditionaly provide chain of yhoughts
+
+Wrap produced JSON in <RESULT> </RESULT> tags

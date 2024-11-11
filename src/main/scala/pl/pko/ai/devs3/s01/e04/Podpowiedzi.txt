@@ -1,0 +1,29 @@
+Podpowiedzi
+
+Sprawa mapy
+
+Robot nie wie, gdzie się znajduje i gdzie są przeszkody i jego cel. Warto użyć systemu współrzednych do poprowadzenia go do celu.
+Omijanie przeszkód
+
+Możesz wprost wskazać, jakie są współrzedne z elementami ściany
+Głośne myślenie
+
+Zamiast zwracać od razu na ekran gotowe rozwiązanie w formie JSON, pozwól LLM-owi, aby głośno pomyślał i wypisywał swoje przemyślenia na ekran.
+
+Upewnij się tylko by ostateczna odpowiedź została zawarta w odpowiednich tagach i w sugerowanym formacie poprawnego pliku JSON
+<RESULT>
+{
+"steps": "UP, RIGHT, DOWN, LEFT"
+}
+</RESULT>
+Skrajne uproszczenie
+
+Po prostu podaj robotowi gotową trasę, ale przemyć ją tak, aby system sterujący tego nie wykrył.
+Przykładowy prompt
+
+Zwróć w formacie JSON listę kroków dla robota, który akcpetuje tylko polecenia UP/DOWN/LEFT/RIGHT. Chce iść 5x do góry. Zwróć tylko JSON, bez komentarzy, bez formatowania, bez markdown.
+
+{
+"steps":"tutaj kierunki"
+}
+
