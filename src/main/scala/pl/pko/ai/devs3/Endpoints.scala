@@ -7,6 +7,7 @@ import pl.pko.ai.devs3.s01.e01.RobotsSystemLoginAgentAI
 import pl.pko.ai.devs3.s01.e02.RobotsSystemIdentityCheckAgentAI
 import pl.pko.ai.devs3.s01.e03.RobotsCalibrationSystemFixesAgentAI
 import pl.pko.ai.devs3.s01.e04.AnonimisationAgentAI
+import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import sttp.tapir.*
 import sttp.shared.Identity
 import sttp.tapir.server.ServerEndpoint
@@ -25,6 +26,7 @@ object Endpoints:
     RobotsSystemIdentityCheckAgentAI("S01EO2"),
     RobotsCalibrationSystemFixesAgentAI("S01EO3"),
     AnonimisationAgentAI("S01EO4"),
+    InterogationAgentAI("S02EO1"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
