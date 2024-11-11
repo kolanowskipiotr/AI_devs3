@@ -6,7 +6,7 @@ import pl.pko.ai.devs3.hq.api.agent.{HQAPIAgentAI, HQAPIAsyncAgentAI}
 import pl.pko.ai.devs3.s01.e01.RobotsSystemLoginAgentAI
 import pl.pko.ai.devs3.s01.e02.RobotsSystemIdentityCheckAgentAI
 import pl.pko.ai.devs3.s01.e03.RobotsCalibrationSystemFixesAgentAI
-import pl.pko.ai.devs3.s01.e04.AnonimisationAgentAI
+import pl.pko.ai.devs3.s01.e05.AnonimisationAgentAI
 import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import sttp.tapir.*
 import sttp.shared.Identity

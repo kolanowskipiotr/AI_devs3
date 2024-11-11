@@ -5,7 +5,7 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import org.slf4j.{Logger, LoggerFactory}
 import pl.pko.ai.devs3.agent.AgentAI
-import pl.pko.ai.devs3.s01.e04.AnonimisationAgentAI
+import pl.pko.ai.devs3.s01.e05.AnonimisationAgentAI
 import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}

@@ -1,4 +1,4 @@
-package pl.pko.ai.devs3.s01.e04
+package pl.pko.ai.devs3.s01.e05
 
 import io.circe.Error
 import io.circe.generic.auto.*
