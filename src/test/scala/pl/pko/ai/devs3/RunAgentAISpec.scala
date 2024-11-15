@@ -8,6 +8,7 @@ import pl.pko.ai.devs3.agent.AgentAI
 import pl.pko.ai.devs3.s01.e05.AnonimisationAgentAI
 import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import pl.pko.ai.devs3.s02.e04.FilteringAndSortingAgentAI
+import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -23,6 +24,20 @@ class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with Ap
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+
+    "run ArticleAnalizerAgentAI" in {
+      // given
+      val agentAi = ArticleAnalizerAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s02/e05/run")
+        .headers(Map(
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "hq-api-key" -> hqApiKey
+        ))
+
+      runAgent(agentAi, request)
+    }
     "run FilteringAndSortingAgentAI" in {
       // given
       val agentAi = FilteringAndSortingAgentAI("ScalaTest")
