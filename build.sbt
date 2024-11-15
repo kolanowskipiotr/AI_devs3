@@ -17,7 +17,8 @@ lazy val rootProject = (project in file(".")).settings(
       "com.softwaremill.sttp.tapir" %% "tapir-sttp-stub-server" % tapirVersion % Test,
       "org.scalatest" %% "scalatest" % "3.2.19" % Test,
       "com.softwaremill.sttp.client3" %% "circe" % "3.9.8" % Test,
-      "org.jsoup" % "jsoup" % "1.18.1"
+      "org.jsoup" % "jsoup" % "1.18.1",
+      "org.apache.commons" % "commons-lang3" % "3.17.0",
     )
   )
 )
