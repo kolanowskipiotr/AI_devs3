@@ -10,8 +10,8 @@ import pl.pko.ai.devs3.s01.e05.AnonimisationAgentAI
 import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import pl.pko.ai.devs3.s02.e04.FilteringAndSortingAgentAI
 import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
+import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
 import sttp.tapir.*
-import sttp.shared.Identity
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
 import sttp.tapir.swagger.bundle.SwaggerInterpreter
@@ -31,6 +31,7 @@ object Endpoints:
     InterogationAgentAI("S02EO1"),
     FilteringAndSortingAgentAI("S02EO4"),
     ArticleAnalizerAgentAI("S02EO5"),
+    KeyWordsExtractionAgentAI("S03EO1"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =

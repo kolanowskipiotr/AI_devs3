@@ -9,10 +9,10 @@ import pl.pko.ai.devs3.s01.e05.AnonimisationAgentAI
 import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import pl.pko.ai.devs3.s02.e04.FilteringAndSortingAgentAI
 import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
+import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
-import sttp.tapir.header
 import sttp.tapir.server.stub.TapirStubInterpreter
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -24,6 +24,20 @@ class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with Ap
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+    
+    "run KeyWordsExtractionAgentAI" in {
+      // given
+      val agentAi = KeyWordsExtractionAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s03/e01/run")
+        .headers(Map(
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "hq-api-key" -> hqApiKey
+        ))
+
+      runAgent(agentAi, request)
+    }
 
     "run ArticleAnalizerAgentAI" in {
       // given
