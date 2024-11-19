@@ -10,6 +10,7 @@ import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import pl.pko.ai.devs3.s02.e04.FilteringAndSortingAgentAI
 import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
 import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
+import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -24,6 +25,23 @@ class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with Ap
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+
+    "run VectorStoreAgentAI" in {
+      // given
+      val agentAi = VectorStoreAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s03/e02/run")
+        .headers(Map(
+          "hq-api-key" -> hqApiKey,
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "qdrant-ai-api-url" -> qdrantApiUrl,
+          "qdrant-ai-api-key" -> qdrantApiKey,
+          "jina-ai-api-key" -> jinaApiKey,
+        ))
+
+      runAgent(agentAi, request)
+    }
     
     "run KeyWordsExtractionAgentAI" in {
       // given

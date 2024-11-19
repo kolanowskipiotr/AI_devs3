@@ -11,6 +11,7 @@ import pl.pko.ai.devs3.s02.e01.InterogationAgentAI
 import pl.pko.ai.devs3.s02.e04.FilteringAndSortingAgentAI
 import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
 import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
+import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -32,6 +33,7 @@ object Endpoints:
     FilteringAndSortingAgentAI("S02EO4"),
     ArticleAnalizerAgentAI("S02EO5"),
     KeyWordsExtractionAgentAI("S03EO1"),
+    VectorStoreAgentAI("S03EO2"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
