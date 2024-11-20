@@ -3,7 +3,7 @@ https://{{ApiKeys.qdrantApiUrl}}/dashboard#/tutorial/quickstart
 
 # Twożenie kolekcji
 Można użyć konsoli: {{ApiKeys.qdrantApiUrl}}/dashboard#/console
-```http request
+```http
 PUT collections/vector_store_example
 {
   "vectors": {
