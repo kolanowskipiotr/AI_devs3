@@ -13,6 +13,7 @@ import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
 import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
 import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import pl.pko.ai.devs3.s03.e03.SQLDataBaseAgentAI
+import pl.pko.ai.devs3.s03.e04.BarbaraZawadzkaAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -30,12 +31,15 @@ object Endpoints:
     RobotsSystemIdentityCheckAgentAI("S01EO2"),
     RobotsCalibrationSystemFixesAgentAI("S01EO3"),
     AnonimisationAgentAI("S01EO4"),
+    
     InterogationAgentAI("S02EO1"),
     FilteringAndSortingAgentAI("S02EO4"),
     ArticleAnalizerAgentAI("S02EO5"),
+    
     KeyWordsExtractionAgentAI("S03EO1"),
     VectorStoreAgentAI("S03EO2"),
     SQLDataBaseAgentAI("S03EO3"),
+    BarbaraZawadzkaAgentAI("S03EO4"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
