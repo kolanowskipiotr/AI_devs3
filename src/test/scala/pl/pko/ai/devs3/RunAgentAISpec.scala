@@ -12,7 +12,7 @@ import pl.pko.ai.devs3.s02.e05.ArticleAnalizerAgentAI
 import pl.pko.ai.devs3.s03.e01.KeyWordsExtractionAgentAI
 import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import pl.pko.ai.devs3.s03.e03.SQLDataBaseAgentAI
-import pl.pko.ai.devs3.s03.e04.BarbaraZawadzkaAgentAI
+import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -27,10 +27,30 @@ class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with Ap
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+
+    "run ConnectionsGraphAgentAI" in {
+      // given
+      val agentAi = ConnectionsGraphAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s03/e05/run")
+        .headers(Map(
+          "hq-api-key" -> hqApiKey,
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "qdrant-ai-api-url" -> qdrantApiUrl,
+          "qdrant-ai-api-key" -> qdrantApiKey,
+          "jina-ai-api-key" -> jinaApiKey,
+          "neo4j-uri" -> neo4jUri,
+          "neo4j-user" -> neo4jUser,
+          "neo4j-password" -> neo4jPassword,
+        ))
+
+      runAgent(agentAi, request)
+    }
     
     "run BarbaraZawadzkaAgentAI" in {
       // given
-      val agentAi = BarbaraZawadzkaAgentAI("ScalaTest")
+      val agentAi = ConnectionsGraphAgentAI("ScalaTest")
       val request = basicRequest
         .post(uri"http://test.com/sync/agents/s03/e04/run")
         .headers(Map(

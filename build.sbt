@@ -19,6 +19,7 @@ lazy val rootProject = (project in file(".")).settings(
       "com.softwaremill.sttp.client3" %% "circe" % "3.9.8" % Test,
       "org.jsoup" % "jsoup" % "1.18.1",
       "org.apache.commons" % "commons-lang3" % "3.17.0",
+      "org.neo4j.driver" % "neo4j-java-driver" % "5.26.3",
     )
   )
 )
