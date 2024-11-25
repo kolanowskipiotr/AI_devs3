@@ -41,6 +41,53 @@ object ClaudeService {
       }
   }
 
+  def sendImageAnalisePrompt(
+                              backend: SttpBackend[Task, MonixStreams & WebSockets],
+                              apiKey: String,
+                              imageBase64: Option[String],
+                              imageMimeType: String,
+                              systemPrompt: String
+                            ): Task[Response[Either[ResponseException[String, Error], ClaudeResponse]]] = {
+    val requestBody =
+      s"""{
+         |  "model": "claude-3-5-sonnet-20241022",
+         |  "max_tokens": 1024,
+         |  "messages": [
+         |    {
+         |      "role": "user",
+         |      "content": [
+         |        {
+         |          "type": "image",
+         |          "source": {
+         |            "type": "base64",
+         |            "media_type": "image/${imageMimeType.toLowerCase}",
+         |            "data": "${imageBase64.getOrElse("")}"
+         |          }
+         |        },
+         |        {
+         |          "type": "text",
+         |          "text":  ${Json.fromString(systemPrompt)}
+         |        }
+         |      ]
+         |    }
+         |  ]
+         |}""".stripMargin
+
+    basicRequest
+      .post(uri"https://api.anthropic.com/v1/messages")
+      .header("x-api-key", apiKey)
+      .header("anthropic-version", "2023-06-01")
+      .header("content-type", "application/json")
+      .body(requestBody)
+      .response(asJson[ClaudeResponse])
+      .send(backend)
+      .map { response =>
+        log.info(s"Send request ${response.request}, Body(${imageBase64.map(requestBody.replace(_, "{imageBase64}")).getOrElse(requestBody)}")
+        log.info(s"Got response code: ${response.code} Body: ${response.body}")
+        response
+      }
+  }
+
   def sendTranscribeImagePrompt(backend: SttpBackend[Task, MonixStreams & WebSockets], apiKey: String, file: Path): Task[Response[Either[ResponseException[String, Error], ClaudeResponse]]] = {
     val fileFormat = file.getFileName.toString.split("\\.").last
     val imageBase64 = java.util.Base64.getEncoder.encodeToString(java.nio.file.Files.readAllBytes(file))

@@ -15,6 +15,7 @@ import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import pl.pko.ai.devs3.s03.e03.SQLDataBaseAgentAI
 import pl.pko.ai.devs3.s03.e04.BarbaraZawadzkaAgentAI
 import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
+import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -26,8 +27,10 @@ object Endpoints:
 
   val aiAgents: List[AgentAI] = List(
     HelthCheckAgentAI("System"),
+    
     HQAPIAgentAI("Prework"),
     HQAPIAsyncAgentAI("Prework"),
+    
     RobotsSystemLoginAgentAI("S01EO1"),
     RobotsSystemIdentityCheckAgentAI("S01EO2"),
     RobotsCalibrationSystemFixesAgentAI("S01EO3"),
@@ -42,6 +45,8 @@ object Endpoints:
     SQLDataBaseAgentAI("S03EO3"),
     BarbaraZawadzkaAgentAI("S03EO4"),
     ConnectionsGraphAgentAI("S03EO5"),
+
+    BarbaraDescriptionAgentAI("S04EO1"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
