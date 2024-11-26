@@ -7,7 +7,7 @@ import io.circe.parser.decode
 import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 import pl.pko.ai.devs3.agent.AgentAI
-import pl.pko.ai.devs3.hq.model.{HQRequest, HQResponse}
+import pl.pko.ai.devs3.hq.model.{HQReportListRequest, HQResponse}
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3
@@ -40,7 +40,7 @@ case class HQAPIAsyncAgentAI(lesson: String) extends AgentAI {
 
     val task = for {
       data <- doGetPoligonData()
-      hqRequest = HQRequest(taskName, hqApiKey, data.split("\n").toList)
+      hqRequest = HQReportListRequest(taskName, hqApiKey, data.split("\n").toList)
       response <- doPostPoligonVeryfication(hqRequest)
     } yield response match {
       case Left(value) => value match {
@@ -61,12 +61,12 @@ case class HQAPIAsyncAgentAI(lesson: String) extends AgentAI {
       case Right(data) => data
     }
 
-  private def doPostPoligonVeryfication(hqRequest: HQRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
+  private def doPostPoligonVeryfication(hqRequest: HQReportListRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
     AsyncHttpClientMonixBackend.resource().use { backend =>
       postPoligonVeryfication(backend, hqRequest)
     }
 
-  private def postPoligonVeryfication(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
+  private def postPoligonVeryfication(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQReportListRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
     basicRequest
       .body(hqRequest)
       .post(uri"https://poligon.aidevs.pl/verify")

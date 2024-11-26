@@ -3,13 +3,13 @@ package pl.pko.ai.devs3.hq.model
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder}
 
-case class HQRequest(
+case class HQReportListRequest(
   task: String,
   apikey: String,
   answer: List[String],
 )
 
-object HQRequest {
-  implicit val encoder: Encoder[HQRequest] = deriveEncoder[HQRequest]
-  implicit val decoder: Decoder[HQRequest] = deriveDecoder[HQRequest]
+object HQReportListRequest {
+  implicit val encoder: Encoder[HQReportListRequest] = deriveEncoder[HQReportListRequest]
+  implicit val decoder: Decoder[HQReportListRequest] = deriveDecoder[HQReportListRequest]
 }

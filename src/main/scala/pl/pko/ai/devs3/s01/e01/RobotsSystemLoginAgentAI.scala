@@ -8,7 +8,7 @@ import monix.eval.Task
 import monix.execution.Scheduler.Implicits.global
 import org.jsoup.Jsoup
 import pl.pko.ai.devs3.agent.AgentAI
-import pl.pko.ai.devs3.hq.model.{HQRequest, HQResponse}
+import pl.pko.ai.devs3.hq.model.{HQReportListRequest, HQResponse}
 import pl.pko.ai.devs3.llm.ollama.model.OllamaResponse
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
@@ -294,7 +294,7 @@ case class RobotsSystemLoginAgentAI(lesson: String) extends AgentAI {
         response.body
       }
 
-  private def doPostPoligonVeryfication(hqRequest: HQRequest): Either[ResponseException[String, Error], HQResponse] = {
+  private def doPostPoligonVeryfication(hqRequest: HQReportListRequest): Either[ResponseException[String, Error], HQResponse] = {
     AsyncHttpClientMonixBackend.resource()
       .use { backend => postPoligonVeryfication(backend, hqRequest) }
       .runSyncUnsafe()
@@ -311,7 +311,7 @@ case class RobotsSystemLoginAgentAI(lesson: String) extends AgentAI {
         response.body
       })
 
-  private def postPoligonVeryfication(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
+  private def postPoligonVeryfication(backend: SttpBackend[Task, MonixStreams & WebSockets], hqRequest: HQReportListRequest): Task[Either[ResponseException[String, Error], HQResponse]] =
     basicRequest
       .body(hqRequest)
       .post(uri"https://poligon.aidevs.pl/verify")

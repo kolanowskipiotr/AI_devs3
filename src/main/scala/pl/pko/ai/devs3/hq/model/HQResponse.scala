@@ -12,6 +12,8 @@ object HQResponse {
   
   def systemError: HQResponse = HQResponse(Int.MaxValue, "System error")
   
+  def success(message: String = "Success"): HQResponse = HQResponse(0, message)
+  
   implicit val encoder: Encoder[HQResponse] = deriveEncoder[HQResponse]
   implicit val decoder: Decoder[HQResponse] = deriveDecoder[HQResponse]
 }

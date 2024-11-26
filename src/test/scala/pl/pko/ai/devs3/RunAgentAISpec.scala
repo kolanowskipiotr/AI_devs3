@@ -14,6 +14,7 @@ import pl.pko.ai.devs3.s03.e02.VectorStoreAgentAI
 import pl.pko.ai.devs3.s03.e03.SQLDataBaseAgentAI
 import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
 import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
+import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -28,6 +29,18 @@ class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with Ap
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+
+    "run FineTuneAgentAI" in {
+      // given
+      val agentAi = FineTuneAgentAI("ScalaTest")
+      val request = basicRequest
+        .headers(Map(
+          "hq-api-key" -> hqApiKey
+        ))
+        .post(uri"http://test.com/sync/agents/s04/e02/run")
+
+      runAgent(agentAi, request)
+    }
     
     "run BarbaraDescriptionAgentAI" in {
       // given
