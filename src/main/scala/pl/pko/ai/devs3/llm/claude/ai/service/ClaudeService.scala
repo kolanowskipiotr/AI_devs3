@@ -35,7 +35,7 @@ object ClaudeService {
       .response(asJson[ClaudeResponse])
       .send(backend)
       .map { response =>
-        log.info(s"Send request ${response.request}, Body($requestBody)")
+        log.info(s"Send request ${response.request}, Body(${requestBody.replace("\\n", "\n")})")
         log.info(s"Got response code: ${response.code} Body: ${response.body}")
         response
       }

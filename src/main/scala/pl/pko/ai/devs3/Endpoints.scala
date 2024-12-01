@@ -17,6 +17,7 @@ import pl.pko.ai.devs3.s03.e04.BarbaraZawadzkaAgentAI
 import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
 import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
+import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -49,6 +50,7 @@ object Endpoints:
 
     BarbaraDescriptionAgentAI("S04EO1"),
     FineTuneAgentAI("S04EO2"),
+    UniversalSearcherAgentAI("S04EO3"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =

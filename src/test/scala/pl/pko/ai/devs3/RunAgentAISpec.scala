@@ -15,6 +15,7 @@ import pl.pko.ai.devs3.s03.e03.SQLDataBaseAgentAI
 import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
 import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
+import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -24,11 +25,32 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with ApiKeys:
+class 
+RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with ApiKeys:
 
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+    
+    "run UniversalSearcherAgentAI" in {
+      // given
+      val agentAi = UniversalSearcherAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s04/e03/run")
+        .headers(Map(
+          "hq-api-key" -> hqApiKey,
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "qdrant-ai-api-url" -> qdrantApiUrl,
+          "qdrant-ai-api-key" -> qdrantApiKey,
+          "jina-ai-api-key" -> jinaApiKey,
+          "neo4j-uri" -> neo4jUri,
+          "neo4j-user" -> neo4jUser,
+          "neo4j-password" -> neo4jPassword,
+        ))
+
+      runAgent(agentAi, request)
+    }
 
     "run FineTuneAgentAI" in {
       // given
