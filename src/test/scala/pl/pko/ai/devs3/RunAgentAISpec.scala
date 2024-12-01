@@ -16,14 +16,16 @@ import pl.pko.ai.devs3.s03.e05.ConnectionsGraphAgentAI
 import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
 import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
+import pl.pko.ai.devs3.s04.e04.{FlightOfTheNavigatorAgentAI, HQInstructionsRequest}
 import sttp.client3.testing.SttpBackendStub
-import sttp.client3.{Identity, RequestT, UriContext, basicRequest}
+import sttp.client3.{BodySerializer, Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
 import sttp.tapir.server.stub.TapirStubInterpreter
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
+import sttp.client3.circe.{asJson, circeBodySerializer}
 
 class 
 RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with ApiKeys:
@@ -31,6 +33,17 @@ RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with ApiKeys:
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+
+    "run FlightOfTheNavigatorAgentAI" in {
+      // given
+
+      val agentAi = FlightOfTheNavigatorAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s04/e04/run")
+        .body(HQInstructionsRequest("poleciałem jedno pole w prawo, a później na sam dół"))
+
+      runAgent(agentAi, request)
+    }
     
     "run UniversalSearcherAgentAI" in {
       // given
