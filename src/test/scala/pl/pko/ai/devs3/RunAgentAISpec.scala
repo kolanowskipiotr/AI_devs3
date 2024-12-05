@@ -17,6 +17,7 @@ import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
 import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
 import pl.pko.ai.devs3.s04.e04.{FlightOfTheNavigatorAgentAI, HQInstructionsRequest}
+import pl.pko.ai.devs3.s05.e01.RecostructPhoneCalsAgentAI
 import sttp.client3.testing.SttpBackendStub
 import sttp.client3.{BodySerializer, Identity, RequestT, UriContext, basicRequest}
 import sttp.model.StatusCode
@@ -33,6 +34,26 @@ RunAgentAISpec extends AnyWordSpec with Matchers with EitherValues with ApiKeys:
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
   "Endpoint" should {
+    
+    "run RecostructPhoneCalsAgentAI" in {
+      // given
+      val agentAi = RecostructPhoneCalsAgentAI("ScalaTest")
+      val request = basicRequest
+        .post(uri"http://test.com/sync/agents/s05/e01/reconstruct")
+        .headers(Map(
+          "hq-api-key" -> hqApiKey,
+          "claude-ai-api-key" -> claudeAiKey,
+          "groq-ai-api-key" -> groqApiKey,
+          "qdrant-ai-api-url" -> qdrantApiUrl,
+          "qdrant-ai-api-key" -> qdrantApiKey,
+          "jina-ai-api-key" -> jinaApiKey,
+          "neo4j-uri" -> neo4jUri,
+          "neo4j-user" -> neo4jUser,
+          "neo4j-password" -> neo4jPassword,
+        ))
+
+      runAgent(agentAi, request)
+    }
 
     "run FlightOfTheNavigatorAgentAI" in {
       // given

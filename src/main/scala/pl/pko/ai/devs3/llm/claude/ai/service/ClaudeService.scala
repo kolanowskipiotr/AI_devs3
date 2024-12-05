@@ -15,11 +15,11 @@ object ClaudeService {
 
   private val log: Logger = LoggerFactory.getLogger(getClass)
 
-  def sendPrompt(backend: SttpBackend[Task, MonixStreams & WebSockets], apiKey: String, prompt: String): Task[Response[Either[ResponseException[String, Error], ClaudeResponse]]] = {
+  def sendPrompt(backend: SttpBackend[Task, MonixStreams & WebSockets], apiKey: String, prompt: String, maxTokens: Int = 1024): Task[Response[Either[ResponseException[String, Error], ClaudeResponse]]] = {
     val requestBody =
       s"""{
          |    "model": "claude-3-5-sonnet-20241022",
-         |    "max_tokens": 1024,
+         |    "max_tokens": $maxTokens,
          |    "messages": [
          |        {"role": "user", "content": ${Json.fromString(prompt)}}
          |    ]

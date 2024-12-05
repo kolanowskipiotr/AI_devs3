@@ -1,0 +1,27 @@
+{
+    "rozmowa1": {
+        "start": "- Hej! Jak tam agentko? Jak się czujesz po rozmowie?",
+        "end": "- no ja nie mogę... na czym go miałaś uczyć tego JavaScriptu? Gość nie ma kompa czaisz?! Na glinianych tabliczkach mieliście pisać te programy dłutem? Teraz wiedzę, że tam byłaś! Dobra, nara! Mam Zygfryda na drugiej linii [*dźwięk odkładanej słuchawki*]",
+        "length": 25
+    },
+    "rozmowa2": {
+        "start": "- Witaj Samuelu. Rozmawiałeś z nię?",
+        "end": "- hej! jesteś tam? Coś słabo Cię słychać. Słychać tylko trzaski i przerywa mocno. Halooooo?",
+        "length": 7
+    },
+    "rozmowa3": {
+        "start": "- Samuelu! helooo?! Słyszysz mnie teraz? Zadzwoniłem ponownie, bo chyba znowu z zasięgiem jest u Ciebie jakiś problem...",
+        "end": "- OK. Dzwonię do Tomasza. [*dźwięk odkładanej słuchawki*]",
+        "length": 6
+    },
+    "rozmowa4": {
+        "start": "- Cześć Tomasz. Tu Samuel. Dostałem ten numer od szefa. Potrzebuję hasła do pierwszej warstwy zabezpieczeń kompa sam wiesz kogo. Możesz mi pomóc?",
+        "end": "- piętka to posłuszna owieczka. Wykonuje polecenia, ale nie wie co robi. Dobra, dzięki za hasło. Przekażę je numerowi piętemu [*dźwięk odkładanej słuchawki*]",
+        "length": 7
+    },
+    "rozmowa5": {
+        "start": "- Halo? Jesteś tam? tu Witek. Potrzebuję Twojej pomocy.",
+        "end": "- jasne mała! powodzenia z tym kombinowaniem. Będź jak Helmut Rahn w 1954 roku i pokaż im na co Cię stać! [*dźwięk odkładanej słuchawki*]",
+        "length": 9
+    }
+}

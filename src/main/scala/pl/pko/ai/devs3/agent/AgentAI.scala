@@ -6,6 +6,8 @@ import pl.pko.ai.devs3.hq.model.HQResponse
 import sttp.tapir.server.ServerEndpoint
 import io.circe.parser.decode
 import monix.eval.Task
+import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.StringUtils.substringBetween
 import sttp.capabilities.WebSockets
 import sttp.capabilities.monix.MonixStreams
 import sttp.client3.{ResponseException, SttpBackend}
@@ -30,4 +32,19 @@ trait AgentAI {
         log.error(s"Parsing of error body fail ${err.getMessage}", err)
         HQResponse.systemError
     }
+
+  protected def extractValuesInTag(str: String, tag: String, separator: String = "\n"): List[String] = {
+    substringBetween(str, s"<$tag>", s"</$tag>")
+      .split(separator)
+      .map(_.replace(separator, ""))
+      .filter(StringUtils.isNotBlank)
+      .map(_.trim)
+      .toList
+  }
+
+  protected def extractValuesTag(str: String, tag: String): Option[String] = {
+    Option(substringBetween(str, s"<$tag>", s"</$tag>"))
+      .filter(StringUtils.isNotBlank)
+      .map(_.trim)
+  }
 }
