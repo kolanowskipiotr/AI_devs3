@@ -5,28 +5,43 @@ import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.generic.semiauto._
 
 case class PhoneCalls(
-  fixedPhoneCalls: Map[String, PhoneCall],
+  phoneCalls: Map[String, PhoneCall],
   unsortedPhoneCals: List[String],
 ) {
-  def isAllFixed: Boolean = 
-    unsortedPhoneCals.isEmpty
+  def isAllFixed: Boolean =
+    phoneCalls.values.forall(_.isFull)
   
   def getPhoneCallsToFix: List[PhoneCall] =
-    fixedPhoneCalls.values
+    phoneCalls.values
       .filterNot(_.isFull)
       .toList
-    
-  def assigneeMessageToPhoneCall(id: String, message: String): PhoneCalls = 
-    fixedPhoneCalls
+      .sortBy(a => (a.maxLength, -a.body.size))
+
+  def assigneeMessageToPhoneCall(id: String, message: String): PhoneCalls =
+    phoneCalls
       .get(id)
       .map(pc => pc.copy(body = pc.body :+ message))
-      .map(npc => fixedPhoneCalls + (id -> npc)) match {
+      .map(npc => phoneCalls + (id -> npc)) match {
       case Some(phoneCalls) => copy(
-        fixedPhoneCalls = phoneCalls,
+        phoneCalls = phoneCalls,
         unsortedPhoneCals = unsortedPhoneCals.filter(_ != message)
       )
       case _ => this
     }
+    
+  def assigneeMessageToPhoneCallByIndex(id: String, messageIndex: String): PhoneCalls = {
+    val messageToAssignee = unsortedPhoneCals(messageIndex.toInt)
+    phoneCalls
+      .get(id)
+      .map(pc => pc.copy(body = pc.body :+ messageToAssignee))
+      .map(npc => phoneCalls + (id -> npc)) match {
+      case Some(phoneCalls) => copy(
+        phoneCalls = phoneCalls,
+        unsortedPhoneCals = unsortedPhoneCals.filterNot(_ == messageToAssignee)
+      )
+      case _ => this
+    }
+  }
 }
 
 object PhoneCalls {

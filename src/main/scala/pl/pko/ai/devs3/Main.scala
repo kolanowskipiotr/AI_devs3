@@ -1,7 +1,7 @@
 package pl.pko.ai.devs3
 
-import io.netty.handler.timeout.ReadTimeoutHandler
 import org.slf4j.{Logger, LoggerFactory}
+import sttp.tapir.server.interceptor.exception.{ExceptionContext, ExceptionHandler}
 import sttp.tapir.server.netty.{NettyConfig, NettyFutureServer, NettyFutureServerBinding, NettyFutureServerOptions}
 import sun.misc.{Signal, SignalHandler}
 
@@ -52,9 +52,15 @@ import scala.util.Random
 
   logAIAgentsEndpoints()
 
+  val exceptionHandler: ExceptionHandler[Future] = ExceptionHandler.pure { case ctx: ExceptionContext =>
+    log.error(s"Exception occurred while processing request: ${ctx.request}", ctx.e)
+    None
+  }
+
   val serverOptions = NettyFutureServerOptions
     .customiseInterceptors
     .metricsInterceptor(Endpoints.prometheusMetrics.metricsInterceptor())
+    .exceptionHandler(exceptionHandler)
     .options
 
   val port = sys.env.get("HTTP_PORT").flatMap(_.toIntOption).getOrElse(getRandomPort)
