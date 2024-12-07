@@ -19,7 +19,8 @@ import pl.pko.ai.devs3.s04.e01.BarbaraDescriptionAgentAI
 import pl.pko.ai.devs3.s04.e02.FineTuneAgentAI
 import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
 import pl.pko.ai.devs3.s04.e04.FlightOfTheNavigatorAgentAI
-import pl.pko.ai.devs3.s05.e01.{RecostructPhoneCallsTakeTwoAgentAI, RecostructPhoneCalsAgentAI}
+import pl.pko.ai.devs3.s05.e01.part1.{RecostructPhoneCallsTakeTwoAgentAI, RecostructPhoneCalsAgentAI}
+import pl.pko.ai.devs3.s05.e01.part2.AnswerQuestionsAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -57,6 +58,7 @@ object Endpoints:
 
     RecostructPhoneCalsAgentAI("S05EO1"),
     RecostructPhoneCallsTakeTwoAgentAI("S05EO1"),
+    AnswerQuestionsAgentAI("S05EO1"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =

@@ -1,9 +1,10 @@
-package pl.pko.ai.devs3.s05.e01
+package pl.pko.ai.devs3.s05.e01.part2
 
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.parser.decode
 import io.circe.syntax.*
 import io.circe.{Decoder, Encoder}
+import pl.pko.ai.devs3.hq.model.HQResponse
 import pl.pko.ai.devs3.s05.e01.model.PhoneCalls
 
 import java.nio.file.{Files, Paths, StandardOpenOption}
@@ -21,8 +22,22 @@ case class Context(
                     neo4jConnected: Boolean = false,
                     neo4jFed: Boolean = false,
                     cached: Boolean = false,
-                    phoneCalls: Option[PhoneCalls] = None,
+
+                    db: DataBase = DataBase.empty,
+                    questions: Map[String, String] = Map.empty,
+                    answerers: Map[String, String] = Map.empty,
+
+                    hqResponse: Option[HQResponse] = None,
                   ) {
+  
+  def getQuestion(questionId: String): Option[String] =
+    questions.get(questionId)
+  
+  def isQuestionAnswered(questionId: String): Boolean =
+    answerers.keySet.contains(questionId)
+  
+  def hasAllAnswerer: Boolean =
+    questions.keySet.forall(answerers.keySet.contains)
 
   def cacheContext: Either[String, Context] = {
     val directory = Paths.get(Context.cachePath)
@@ -59,7 +74,7 @@ case class Context(
 
 object Context {
 
-  val cachePath = "src/main/scala/pl/pko/ai/devs3/s05/e01/cache"
+  val cachePath = "src/main/scala/pl/pko/ai/devs3/s05/e01/part2/cache"
 
   def apply(
              hqApikey: String,

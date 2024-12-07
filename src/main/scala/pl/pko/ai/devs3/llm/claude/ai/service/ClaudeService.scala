@@ -24,7 +24,7 @@ object ClaudeService {
          |        {"role": "user", "content": ${Json.fromString(prompt)}}
          |    ]
          |}""".stripMargin
-    log.info(requestBody)
+    log.debug(requestBody)
 
     basicRequest
       .post(uri"https://api.anthropic.com/v1/messages")
@@ -35,8 +35,8 @@ object ClaudeService {
       .response(asJson[ClaudeResponse])
       .send(backend)
       .map { response =>
-        log.info(s"Send request ${response.request}, Body(${requestBody.replace("\\n", "\n")})")
-        log.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.debug(s"Send request ${response.request}, Body(${requestBody.replace("\\n", "\n")})")
+        log.debug(s"Got response code: ${response.code} Body: ${response.body}")
         response
       }
   }
@@ -82,8 +82,8 @@ object ClaudeService {
       .response(asJson[ClaudeResponse])
       .send(backend)
       .map { response =>
-        log.info(s"Send request ${response.request}, Body(${imageBase64.map(requestBody.replace(_, "{imageBase64}")).getOrElse(requestBody)}")
-        log.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.debug(s"Send request ${response.request}, Body(${imageBase64.map(requestBody.replace(_, "{imageBase64}")).getOrElse(requestBody)}")
+        log.debug(s"Got response code: ${response.code} Body: ${response.body}")
         response
       }
   }
@@ -125,8 +125,8 @@ object ClaudeService {
       .response(asJson[ClaudeResponse])
       .send(backend)
       .map { response =>
-        log.info(s"Send request ${response.request}, Body(${requestBody.replace(imageBase64, "{imageBase64}")})")
-        log.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.debug(s"Send request ${response.request}, Body(${requestBody.replace(imageBase64, "{imageBase64}")})")
+        log.debug(s"Got response code: ${response.code} Body: ${response.body}")
         response
       }
   }
@@ -145,8 +145,8 @@ object ClaudeService {
       .response(asJson[Json])
       .send(backend)
       .map { response =>
-        log.info(s"Send request ${response.request}, File($filePath)")
-        log.info(s"Got response code: ${response.code} Body: ${response.body}")
+        log.debug(s"Send request ${response.request}, File($filePath)")
+        log.debug(s"Got response code: ${response.code} Body: ${response.body}")
         response
       }
   }

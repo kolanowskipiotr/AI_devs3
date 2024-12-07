@@ -47,4 +47,21 @@ trait AgentAI {
       .filter(StringUtils.isNotBlank)
       .map(_.trim)
   }
+  
+  private def mkString[K: Ordering, V](map: Map[K, List[V]]): String = {
+    map.toList
+      .sortBy(_._1)
+      .map { case (key, values) =>
+        s"$key:\n\t${values.mkString("\n\t")}"
+      }
+      .mkString("\n")
+  }
+  
+  protected def splitNonEmpty(content: String, separator: String = "\n"): List[String] =
+    content
+      .split(separator)
+      .map(_.replace(separator, ""))
+      .filter(StringUtils.isNotBlank)
+      .map(_.trim)
+      .toList
 }

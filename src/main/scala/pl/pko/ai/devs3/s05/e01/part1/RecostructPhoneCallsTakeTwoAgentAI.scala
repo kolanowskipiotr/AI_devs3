@@ -1,4 +1,4 @@
-package pl.pko.ai.devs3.s05.e01
+package pl.pko.ai.devs3.s05.e01.part1
 
 import io.circe.parser.parse
 import io.circe.{Error, HCursor}
