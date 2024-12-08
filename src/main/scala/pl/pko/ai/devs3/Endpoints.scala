@@ -21,6 +21,7 @@ import pl.pko.ai.devs3.s04.e03.UniversalSearcherAgentAI
 import pl.pko.ai.devs3.s04.e04.FlightOfTheNavigatorAgentAI
 import pl.pko.ai.devs3.s05.e01.part1.{RecostructPhoneCallsTakeTwoAgentAI, RecostructPhoneCalsAgentAI}
 import pl.pko.ai.devs3.s05.e01.part2.AnswerQuestionsAgentAI
+import pl.pko.ai.devs3.s05.e02.PeopleLocalisationAgentAI
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics
@@ -59,6 +60,7 @@ object Endpoints:
     RecostructPhoneCalsAgentAI("S05EO1"),
     RecostructPhoneCallsTakeTwoAgentAI("S05EO1"),
     AnswerQuestionsAgentAI("S05EO1"),
+    PeopleLocalisationAgentAI("S05EO2"),
   )
   
   val apiEndpoints: List[ServerEndpoint[Any, Future]] =
