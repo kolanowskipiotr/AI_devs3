@@ -1,1 +1,265 @@
-{"hqApikey":"SECRET","claudeApiKey":"SECRET","groqApiKey":"SECRET","qdrantApiUrl":"SECRET","qdrantApiKey":"SECRET","jinaApiKey":"SECRET","neo4jUri":"SECRET","neo4jUser":"SECRET","neo4jPassword":"SECRET","neo4jConnected":false,"neo4jFed":false,"cached":true,"db":{"phoneCalls":{},"facts":{},"tools":[{"toolName":"FINAL_ANSWER_TOOL","description":"Tool responds the final answer to User","parameters":"Yur final answer to user need or query","usageExamples":[{"tool":"FINAL_ANSWER_TOOL","parameters":"Wrocław Zabobrze"}],"provideExamples":false},{"toolName":"FIND_PEOPLE_IN_LOCATION_TOOL","description":"Tool retrieves people that were sported in provided location","parameters":"Location name to search for people","usageExamples":[{"tool":"FIND_PEOPLE_IN_LOCATION_TOOL","parameters":"Lubawa"}],"provideExamples":false},{"toolName":"GET_PERSON_ID_TOOL","description":"Tool retrieves person ID based on provided name","parameters":"Person name to search for ID","usageExamples":[{"tool":"GET_PERSON_ID_TOOL","parameters":"SAMUEL"}],"provideExamples":false},{"toolName":"GET_PERSON_GPS_COORDINATES_TOOL","description":"Tool retrieves person GPS coordinates based on provided ID","parameters":"Person ID to search for GPS coordinates","usageExamples":[{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"98"}],"provideExamples":false}],"actions":[{"tool":{"toolName":"FIND_PEOPLE_IN_LOCATION_TOOL","description":"Tool retrieves people that were sported in provided location","parameters":"Location name to search for people","usageExamples":[{"tool":"FIND_PEOPLE_IN_LOCATION_TOOL","parameters":"Lubawa"}],"provideExamples":false},"command":{"tool":"FIND_PEOPLE_IN_LOCATION_TOOL","parameters":"Lubawa"},"result":["RAFAL AZAZEL BARBARA SAMUEL"],"uuid":"006d89c1-974d-45c2-af34-734b2ffc3319"},{"tool":{"toolName":"GET_PERSON_ID_TOOL","description":"Tool retrieves person ID based on provided name","parameters":"Person name to search for ID","usageExamples":[{"tool":"GET_PERSON_ID_TOOL","parameters":"SAMUEL"}],"provideExamples":false},"command":{"tool":"GET_PERSON_ID_TOOL","parameters":"RAFAL"},"result":["28"],"uuid":"f408f09b-6686-46d6-9abb-b085c56b7f68"},{"tool":{"toolName":"GET_PERSON_ID_TOOL","description":"Tool retrieves person ID based on provided name","parameters":"Person name to search for ID","usageExamples":[{"tool":"GET_PERSON_ID_TOOL","parameters":"SAMUEL"}],"provideExamples":false},"command":{"tool":"GET_PERSON_ID_TOOL","parameters":"AZAZEL"},"result":["3"],"uuid":"ee97247e-9670-4911-b267-034747e0b77d"},{"tool":{"toolName":"GET_PERSON_ID_TOOL","description":"Tool retrieves person ID based on provided name","parameters":"Person name to search for ID","usageExamples":[{"tool":"GET_PERSON_ID_TOOL","parameters":"SAMUEL"}],"provideExamples":false},"command":{"tool":"GET_PERSON_ID_TOOL","parameters":"SAMUEL"},"result":["98"],"uuid":"8fc8b498-3e18-4b33-abb1-3f0d44b0ed9e"},{"tool":{"toolName":"GET_PERSON_GPS_COORDINATES_TOOL","description":"Tool retrieves person GPS coordinates based on provided ID","parameters":"Person ID to search for GPS coordinates","usageExamples":[{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"98"}],"provideExamples":false},"command":{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"28"},"result":["{\"lat\":53.451974,\"lon\":18.759189}"],"uuid":"3c2ac5cc-8f09-4d1e-83fa-7fcfd828222e"},{"tool":{"toolName":"GET_PERSON_GPS_COORDINATES_TOOL","description":"Tool retrieves person GPS coordinates based on provided ID","parameters":"Person ID to search for GPS coordinates","usageExamples":[{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"98"}],"provideExamples":false},"command":{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"3"},"result":["{\"lat\":50.064851459004686,\"lon\":19.94988170674601}"],"uuid":"3ce69f07-21ae-4acc-a95e-27b6174f12ea"},{"tool":{"toolName":"GET_PERSON_GPS_COORDINATES_TOOL","description":"Tool retrieves person GPS coordinates based on provided ID","parameters":"Person ID to search for GPS coordinates","usageExamples":[{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"98"}],"provideExamples":false},"command":{"tool":"GET_PERSON_GPS_COORDINATES_TOOL","parameters":"98"},"result":["{\"lat\":53.50357079380177,\"lon\":19.745866344712706}"],"uuid":"2e7eb029-837f-4374-a64f-421db52befcb"},{"tool":{"toolName":"FINAL_ANSWER_TOOL","description":"Tool responds the final answer to User","parameters":"Yur final answer to user need or query","usageExamples":[{"tool":"FINAL_ANSWER_TOOL","parameters":"Wrocław Zabobrze"}],"provideExamples":false},"command":{"tool":"FINAL_ANSWER_TOOL","parameters":"Znalezione koordynaty GPS dla osób z Lubawy (z wyłączeniem Barbary):\nRafał: 53.451974, 18.759189\nAzazel: 50.064851459004686, 19.94988170674601\nSamuel: 53.50357079380177, 19.745866344712706"},"result":["{\n  \"RAFAL\": {\n    \"lat\": 53.451974,\n    \"lon\": 18.759189\n  },\n  \"AZAZEL\": {\n    \"lat\": 50.064851459004686,\n    \"lon\": 19.94988170674601\n  },\n  \"SAMUEL\": {\n    \"lat\": 53.50357079380177,\n    \"lon\": 19.745866344712706\n  }\n}"],"uuid":"367eeb77-3d29-477b-b597-4dd0ec3af7ca"}]},"userMessage":"Wiemy, że Rafał planował udać się do Lubawy, ale musimy się dowiedzieć, kto tam na niego czekał. Nie wiemy, czy te osoby nadal tam są. Jeśli to możliwe, to spróbuj namierzyć ich za pomocą systemu GPS. Jest szansa, że samochody i elektronika, z którą podróżują, zdradzą ich pozycję. A! Ważna sprawa. Nie próbuj nawet wyciągać lokalizacji dla Barbary, bo roboty teraz monitorują każde zapytanie do API i gdy zobaczą coś, co zawiera jej imię, to podniosą alarm. Zwróć nam więc koordynaty wszystkich osób, ale koniecznie bez Barbary.","agentAnswer":{"RAFAL":{"lat":53.451974,"lon":18.759189},"AZAZEL":{"lat":50.064851459004686,"lon":19.94988170674601},"SAMUEL":{"lat":53.50357079380177,"lon":19.745866344712706}},"hqResponse":{"code":0,"message":"{{FLG:COORDINATES}}"}}
+{
+  "hqApikey": "SECRET",
+  "claudeApiKey": "SECRET",
+  "groqApiKey": "SECRET",
+  "qdrantApiUrl": "SECRET",
+  "qdrantApiKey": "SECRET",
+  "jinaApiKey": "SECRET",
+  "neo4jUri": "SECRET",
+  "neo4jUser": "SECRET",
+  "neo4jPassword": "SECRET",
+  "neo4jConnected": false,
+  "neo4jFed": false,
+  "cached": true,
+  "db": {
+    "phoneCalls": {},
+    "facts": {},
+    "tools": [
+      {
+        "toolName": "FINAL_ANSWER_TOOL",
+        "description": "Tool responds the final answer to User",
+        "parameters": "Yur final answer to user need or query",
+        "usageExamples": [
+          {
+            "tool": "FINAL_ANSWER_TOOL",
+            "parameters": "Wrocław Zabobrze"
+          }
+        ],
+        "provideExamples": false
+      },
+      {
+        "toolName": "FIND_PEOPLE_IN_LOCATION_TOOL",
+        "description": "Tool retrieves people that were sported in provided location",
+        "parameters": "Location name to search for people",
+        "usageExamples": [
+          {
+            "tool": "FIND_PEOPLE_IN_LOCATION_TOOL",
+            "parameters": "Lubawa"
+          }
+        ],
+        "provideExamples": false
+      },
+      {
+        "toolName": "GET_PERSON_ID_TOOL",
+        "description": "Tool retrieves person ID based on provided name",
+        "parameters": "Person name to search for ID",
+        "usageExamples": [
+          {
+            "tool": "GET_PERSON_ID_TOOL",
+            "parameters": "SAMUEL"
+          }
+        ],
+        "provideExamples": false
+      },
+      {
+        "toolName": "GET_PERSON_GPS_COORDINATES_TOOL",
+        "description": "Tool retrieves person GPS coordinates based on provided ID",
+        "parameters": "Person ID to search for GPS coordinates",
+        "usageExamples": [
+          {
+            "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+            "parameters": "98"
+          }
+        ],
+        "provideExamples": false
+      }
+    ],
+    "actions": [
+      {
+        "tool": {
+          "toolName": "FIND_PEOPLE_IN_LOCATION_TOOL",
+          "description": "Tool retrieves people that were sported in provided location",
+          "parameters": "Location name to search for people",
+          "usageExamples": [
+            {
+              "tool": "FIND_PEOPLE_IN_LOCATION_TOOL",
+              "parameters": "Lubawa"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "FIND_PEOPLE_IN_LOCATION_TOOL",
+          "parameters": "Lubawa"
+        },
+        "result": [
+          "RAFAL AZAZEL BARBARA SAMUEL"
+        ],
+        "uuid": "006d89c1-974d-45c2-af34-734b2ffc3319"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_ID_TOOL",
+          "description": "Tool retrieves person ID based on provided name",
+          "parameters": "Person name to search for ID",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_ID_TOOL",
+              "parameters": "SAMUEL"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_ID_TOOL",
+          "parameters": "RAFAL"
+        },
+        "result": [
+          "28"
+        ],
+        "uuid": "f408f09b-6686-46d6-9abb-b085c56b7f68"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_ID_TOOL",
+          "description": "Tool retrieves person ID based on provided name",
+          "parameters": "Person name to search for ID",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_ID_TOOL",
+              "parameters": "SAMUEL"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_ID_TOOL",
+          "parameters": "AZAZEL"
+        },
+        "result": [
+          "3"
+        ],
+        "uuid": "ee97247e-9670-4911-b267-034747e0b77d"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_ID_TOOL",
+          "description": "Tool retrieves person ID based on provided name",
+          "parameters": "Person name to search for ID",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_ID_TOOL",
+              "parameters": "SAMUEL"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_ID_TOOL",
+          "parameters": "SAMUEL"
+        },
+        "result": [
+          "98"
+        ],
+        "uuid": "8fc8b498-3e18-4b33-abb1-3f0d44b0ed9e"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "description": "Tool retrieves person GPS coordinates based on provided ID",
+          "parameters": "Person ID to search for GPS coordinates",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+              "parameters": "98"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "parameters": "28"
+        },
+        "result": [
+          "{\"lat\":53.451974,\"lon\":18.759189}"
+        ],
+        "uuid": "3c2ac5cc-8f09-4d1e-83fa-7fcfd828222e"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "description": "Tool retrieves person GPS coordinates based on provided ID",
+          "parameters": "Person ID to search for GPS coordinates",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+              "parameters": "98"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "parameters": "3"
+        },
+        "result": [
+          "{\"lat\":50.064851459004686,\"lon\":19.94988170674601}"
+        ],
+        "uuid": "3ce69f07-21ae-4acc-a95e-27b6174f12ea"
+      },
+      {
+        "tool": {
+          "toolName": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "description": "Tool retrieves person GPS coordinates based on provided ID",
+          "parameters": "Person ID to search for GPS coordinates",
+          "usageExamples": [
+            {
+              "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+              "parameters": "98"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "GET_PERSON_GPS_COORDINATES_TOOL",
+          "parameters": "98"
+        },
+        "result": [
+          "{\"lat\":53.50357079380177,\"lon\":19.745866344712706}"
+        ],
+        "uuid": "2e7eb029-837f-4374-a64f-421db52befcb"
+      },
+      {
+        "tool": {
+          "toolName": "FINAL_ANSWER_TOOL",
+          "description": "Tool responds the final answer to User",
+          "parameters": "Yur final answer to user need or query",
+          "usageExamples": [
+            {
+              "tool": "FINAL_ANSWER_TOOL",
+              "parameters": "Wrocław Zabobrze"
+            }
+          ],
+          "provideExamples": false
+        },
+        "command": {
+          "tool": "FINAL_ANSWER_TOOL",
+          "parameters": "Znalezione koordynaty GPS dla osób z Lubawy (z wyłączeniem Barbary):\nRafał: 53.451974, 18.759189\nAzazel: 50.064851459004686, 19.94988170674601\nSamuel: 53.50357079380177, 19.745866344712706"
+        },
+        "result": [
+          "{\n  \"RAFAL\": {\n    \"lat\": 53.451974,\n    \"lon\": 18.759189\n  },\n  \"AZAZEL\": {\n    \"lat\": 50.064851459004686,\n    \"lon\": 19.94988170674601\n  },\n  \"SAMUEL\": {\n    \"lat\": 53.50357079380177,\n    \"lon\": 19.745866344712706\n  }\n}"
+        ],
+        "uuid": "367eeb77-3d29-477b-b597-4dd0ec3af7ca"
+      }
+    ]
+  },
+  "userMessage": "Wiemy, że Rafał planował udać się do Lubawy, ale musimy się dowiedzieć, kto tam na niego czekał. Nie wiemy, czy te osoby nadal tam są. Jeśli to możliwe, to spróbuj namierzyć ich za pomocą systemu GPS. Jest szansa, że samochody i elektronika, z którą podróżują, zdradzą ich pozycję. A! Ważna sprawa. Nie próbuj nawet wyciągać lokalizacji dla Barbary, bo roboty teraz monitorują każde zapytanie do API i gdy zobaczą coś, co zawiera jej imię, to podniosą alarm. Zwróć nam więc koordynaty wszystkich osób, ale koniecznie bez Barbary.",
+  "agentAnswer": {
+    "RAFAL": {
+      "lat": 53.451974,
+      "lon": 18.759189
+    },
+    "AZAZEL": {
+      "lat": 50.064851459004686,
+      "lon": 19.94988170674601
+    },
+    "SAMUEL": {
+      "lat": 53.50357079380177,
+      "lon": 19.745866344712706
+    }
+  },
+  "hqResponse": {
+    "code": 0,
+    "message": "{{FLG:COORDINATES}}"
+  }
+}
