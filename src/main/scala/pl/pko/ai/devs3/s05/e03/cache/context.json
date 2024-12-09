@@ -1,0 +1,52 @@
+{
+  "hqApikey": "SECRET",
+  "claudeApiKey": "SECRET",
+  "groqApiKey": "SECRET",
+  "qdrantApiUrl": "SECRET",
+  "qdrantApiKey": "SECRET",
+  "jinaApiKey": "SECRET",
+  "neo4jUri": "SECRET",
+  "neo4jUser": "SECRET",
+  "neo4jPassword": "SECRET",
+  "neo4jConnected": false,
+  "neo4jFed": false,
+  "cached": true,
+  "timestamp": {
+    "code": 0,
+    "message": {
+      "signature": "4e920eae20633577f3dd1a58f50ad49e",
+      "timestamp": 1733776836,
+      "challenges": [
+        "https://rafal.ag3nts.org/source0",
+        "https://rafal.ag3nts.org/source1"
+      ]
+    }
+  },
+  "task1": {
+    "task": "Odpowiedz na pytania",
+    "data": [
+      "Jak nazywa się najstarszy hymn Polski?",
+      "Z jakim miastem kojarzy się Mikołaj Kopernik?",
+      "Kto jest autorem \"Zbrodni i kary\"?",
+      "Kiedy podpisano konstytucję 3 maja?"
+    ]
+  },
+  "task2": {
+    "task": "Źródło wiedzy https://centrala.ag3nts.org/dane/arxiv-draft.html",
+    "data": [
+      "Ile bitów danych przesłano w ramach eksperymentu?",
+      "Rozwiń skrót BNW-01"
+    ]
+  },
+  "answer1": "1. \"Bogurodzica\" - najstarszy zachowany polski hymn\n2. Z Toruniem (tam się urodził) i Fromborkiem (gdzie prowadził obserwacje)\n3. Fiodor Dostojewski\n4. 3 maja 1791 roku",
+  "answer2": "Na podstawie dokumentu:\n\n- Przesłano 128 bitów danych, które zarejestrowały się 42 minuty przed rozpoczęciem eksperymentu\n\n- BNW-01 to skrót od \"Brave New World\" (Nowy Wspaniały Świat)",
+  "answareCache": {
+    "Jak nazywa się najstarszy hymn Polski?Z jakim miastem kojarzy się Mikołaj Kopernik?Kto jest autorem \"Zbrodni i kary\"?Kiedy podpisano konstytucję 3 maja?": "1. \"Bogurodzica\" - najstarszy zachowany polski hymn\n2. Z Toruniem (tam się urodził) i Fromborkiem (gdzie prowadził obserwacje)\n3. Fiodor Dostojewski\n4. 3 maja 1791 roku",
+    "Ile bitów danych przesłano w ramach eksperymentu?Rozwiń skrót BNW-01": "Na podstawie dokumentu:\n\n- Przesłano 128 bitów danych, które zarejestrowały się 42 minuty przed rozpoczęciem eksperymentu\n\n- BNW-01 to skrót od \"Brave New World\" (Nowy Wspaniały Świat)"
+  },
+  "hqResponse": {
+    "code": 0,
+    "message": "{{FLG:SPEEDYGONZALES}}"
+  },
+  "hqResponseError": "statusCode: 400, response: {\n    \"code\": -305,\n    \"message\": \"Too late! Time is up! You are not using technology from year 2238, right?\",\n    \"start\": \"2024-12-09 21:40:05\",\n    \"now\": \"2024-12-09 21:40:14\",\n    \"took\": \"9 seconds\",\n    \"time_limit\": \"6 seconds\"\n}"
+}
